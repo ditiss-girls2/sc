@@ -1,0 +1,119 @@
+=== WIRESHARK LAB SHEET 
+
+Q1. Capture only HTTP packets
+Use: Show HTTP traffic
+Filter:
+http
+----
+Q2. Find DNS Queries
+Use: Show DNS requests
+Filter:
+dns
+Generate:
+ping google.com
+or
+nslookup google.com
+------
+Q3. Find TCP Three-Way Handshake
+Use: Verify TCP connection establishment
+Filter:
+tcp
+Look For:
+SYN
+SYN, ACK
+ACK
+---
+Q4. Capture ICMP Traffic
+Use: Show Ping packets
+Filter:
+icmp
+Generate:
+ping <Target_IP>
+----
+Q5. Export Captured Packets
+Use: Save capture file
+File → Save As → capture.pcapng
+-----
+Q6. Find Source & Destination MAC Address
+Use: View MAC Address
+Packet → Ethernet II
+Source:
+Destination:
+-----
+Q7. Display Packets from Specific IP
+Use: Show packets from one IP
+Filter:
+ip.src == 192.168.1.20
+-----
+Q8. Display Packets to Specific IP
+Use: Show packets to one IP
+Filter:
+ip.dst == 192.168.1.20
+------
+Q9. Display All Traffic of One IP
+Use: Source + Destination
+Filter:
+ip.addr == 192.168.1.20
+----
+Q10. Display Traffic Between Two IPs
+Use: Communication between two hosts
+Filter:
+(ip.addr == 192.168.1.10) && (ip.addr == 192.168.1.20)
+-----
+Q11. Display One-Way Traffic
+Use: Source → Destination
+Filter:
+ip.src == 192.168.1.10 && ip.dst == 192.168.1.20
+-----
+Q12. Display TCP Packets
+Use: TCP traffic
+Filter:
+tcp
+----
+Q13. Display UDP Packets
+Use: UDP traffic
+Filter:
+udp
+-----
+Q14. Display ARP Packets
+Use: MAC Resolution
+Filter:
+arp
+-----
+Q15. Display SSH Traffic
+Use: SSH packets
+Filter:
+tcp.port == 22
+----
+Q16. Display HTTP Port 80
+Use: HTTP packets
+Filter:
+tcp.port == 80
+----
+Q17. Display HTTPS Traffic
+Use: HTTPS/TLS packets
+Filter:
+tls
+----
+Q18. Search Text in Packets
+Use: Find string in packet
+Filter:
+frame contains "password"
+or
+tcp contains "admin"
+=====
+MOST IMPORTANT FILTERS
+http
+https (tls)
+dns
+icmp
+tcp
+udp
+arp
+tcp.port == 80
+tcp.port == 22
+ip.src == <IP>
+ip.dst == <IP>
+ip.addr == <IP>
+(ip.addr == IP1) && (ip.addr == IP2)
+======

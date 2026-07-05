@@ -1,0 +1,164 @@
+======================= SCAPY LAB (USING VARIABLES) =======================
+
+Start Scapy
+
+sudo scapy
+
+Q1. Send One ICMP Packet
+Use: Send a single ping packet
+
+a = IP(dst="192.168.1.10")/ICMP()
+a.show()
+send(a)
+
+======
+
+Q2. Send 100 ICMP Packets
+Use: Send multiple ping packets
+
+a = IP(dst="192.168.1.10")/ICMP()
+a.show()
+send(a, count=100)
+
+======
+Q3. Craft TCP SYN Packet
+Use: Create SYN packet
+
+a = IP(dst="192.168.1.10")
+b = TCP(dport=80, flags="S")
+
+pkt = a/b
+
+pkt.show()
+
+send(pkt)
+
+=======
+Q4. Create UDP Packet
+Use: Send UDP packet
+
+a = IP(dst="192.168.1.10")
+b = UDP(dport=53)
+
+pkt = a/b
+
+pkt.show()
+
+send(pkt)
+
+=======
+Q5. Spoof Source IP
+Use: Send packet with fake IP
+
+a = IP(src="10.10.10.10", dst="192.168.1.10")
+b = ICMP()
+
+pkt = a/b
+
+pkt.show()
+
+send(pkt)
+
+======
+Q6. ARP Scan
+Use: Scan subnet
+
+a = arping("192.168.1.0/24")
+
+=========
+Q7. Capture 10 Packets
+Use: Packet Sniffing
+
+a = sniff(count=10)
+
+a.summary()
+
+======
+Q8. Capture Only ICMP
+Use: ICMP Sniffing
+
+a = sniff(filter="icmp", count=10)
+
+a.summary()
+
+======
+
+Q9. Capture Only TCP
+Use: TCP Sniffing
+
+a = sniff(filter="tcp", count=10)
+
+a.summary()
+
+======
+Q10. Save Captured Packets
+Use: Save packets
+
+a = sniff(count=10)
+
+wrpcap("capture.pcap", a)
+
+=======
+Q11. Read Capture File
+Use: Open pcap
+
+a = rdpcap("capture.pcap")
+
+a.summary()
+
+=======
+Q12. DNS Query
+Use: Send DNS request
+
+a = IP(dst="8.8.8.8")
+b = UDP(dport=53)
+c = DNS(rd=1, qd=DNSQR(qname="google.com"))
+
+pkt = a/b/c
+
+pkt.show()
+
+sr1(pkt)
+
+=======
+
+Q13. Send Packet and Wait for Reply
+
+a = IP(dst="192.168.1.10")/ICMP()
+
+a.show()
+
+sr1(a)
+
+========
+Q14. Show Packet Details
+
+a = IP(dst="192.168.1.10")/ICMP()
+
+a.show()
+
+========
+
+Q15. Display Interfaces
+
+show_interfaces()
+
+======
+
+Q16. Display Routing Table
+
+conf.route
+
+======
+Q17. Display Packet Summary
+
+a = sniff(count=5)
+
+a.summary()
+
+=======
+Q18. Exit Scapy
+
+exit()
+
+=====

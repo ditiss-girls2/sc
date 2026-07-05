@@ -1,0 +1,49 @@
+sudo apt update -y
+sudo apt install snort apache2 net-tools hping3 tcpdump -y
+
+ip a
+
+# Example IP setup:
+# Snort/Web Server: 192.168.25.10
+# Client: 192.168.25.20
+
+sudo systemctl enable apache2
+sudo systemctl start apache2
+
+sudo vim /etc/snort/snort.conf
+# Set:
+# var HOME_NET 192.168.25.0/24
+# include $RULE_PATH/local.rules  uncomment this line in file
+
+sudo vim /etc/snort/rules/local.rules
+
+alert icmp any any -> $HOME_NET any (msg:"ICMP Large Packet >100 bytes"; dsize:>100; sid:100001; rev:1;)
+alert icmp any any -> $HOME_NET any (msg:"ICMP Flood Detected"; detection_filter:track by_src, count 10, seconds 10; sid:100002; rev:1;)
+
+alert tcp any any -> $HOME_NET 80 (msg:"SYN Flood HTTP"; flags:S; detection_filter:track by_src, count 10, seconds 10; sid:100003; rev:1;)
+alert tcp any any -> $HOME_NET 22 (msg:"SSH Brute Force"; flags:S; detection_filter:track by_src, count 5, seconds 10; sid:100004; rev:1;)
+
+alert udp any any -> any 53 (msg:"DNS Gmail Access"; content:"gmail"; sid:100005; rev:1;)
+alert udp any any -> any 53 (msg:"DNS Facebook Access"; content:"facebook"; sid:100006; rev:1;)
+alert udp any any -> any 53 (msg:"DNS Instagram Access"; content:"instagram"; sid:100007; rev:1;)
+alert tcp any any -> $HOME_NET any (msg:"Port Scan Detected"; flags:S; detection_filter:track by_src, count 15, seconds 10; sid:100008; rev:1;)
+alert tcp any any -> $HOME_NET 80 (msg:"HTTP GET Flood"; content:"GET"; http_method; detection_filter:track by_src, count 20, seconds 10; sid:100009; rev:1;)
+alert icmp any any -> $HOME_NET any (msg:"ICMP Activity Spike"; detection_filter:track by_src, count 20, seconds 10; sid:100010; rev:1;)
+alert tcp any any -> $HOME_NET 22 (msg:"SSH Connection Attempt"; flags:S; detection_filter:track by_src, count 5, seconds 10; sid:100011; rev:1;)
+
+sudo snort -T -c /etc/snort/snort.conf
+
+sudo snort -A console -q -c /etc/snort/snort.conf -i eth0  <-- for final ans
+or 
+sudo snort -A console -i ens37 -c /etc/snort/snort.conf
+
+ping -s 200 192.168.25.10
+ping 192.168.25.10 -i 0.1
+hping3 -S -p 80 --flood 192.168.25.10
+for i in {1..10}; do ssh test@192.168.25.10; done
+
+nslookup gmail.com 192.168.25.10
+nslookup facebook.com 192.168.25.10
+nslookup instagram.com 192.168.25.10
+
+sudo tail -f /var/log/snort/alert
