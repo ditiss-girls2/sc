@@ -1,0 +1,191 @@
+Q1. Scan All Open Ports
+
+nmap 192.168.80.138
+
+Q2. Scan Only Port 80
+
+nmap -p 80 192.168.80.138
+
+Q3. Scan Multiple Ports (21,22,23,80,443)
+
+nmap -p 21,22,23,80,443 192.168.80.138
+
+Q4. Scan Port Range (1-1000)
+
+nmap -p 1-1000 192.168.80.138
+
+Q5. TCP SYN Scan
+
+sudo nmap -sS 192.168.80.138
+
+Q6. TCP Connect Scan
+
+nmap -sT 192.168.80.138
+
+Q7. UDP Scan
+
+sudo nmap -sU 192.168.80.138
+
+Q8. Ping Scan
+
+nmap -sn 192.168.80.138
+
+Q9. Scan Entire Subnet
+
+nmap -sn 192.168.80.0/24
+
+Q10. Detect Operating System
+
+sudo nmap -O 192.168.80.138
+
+Q11. Detect Service Version
+
+nmap -sV 192.168.80.138
+
+Q12. Aggressive Scan
+
+sudo nmap -A 192.168.80.138
+
+Q13. Run Default NSE Scripts
+
+nmap -sC 192.168.80.138
+
+Q14. Scan Without Host Discovery
+
+nmap -Pn 192.168.80.138
+
+Q15. Stealth Scan
+
+sudo nmap -sS 192.168.80.138
+
+Q16. Verbose Scan
+
+nmap -v 192.168.80.138
+
+Q17. Save Normal Output
+
+nmap -oN result.txt 192.168.80.138
+
+Q18. Save XML Output
+
+nmap -oX result.xml 192.168.80.138
+
+Q19. Save All Formats
+
+nmap -oA result 192.168.80.138
+
+Creates:
+result.nmap
+result.xml
+result.gnmap
+
+Q20. Scan Multiple Hosts
+
+nmap 192.168.80.138 192.168.80.128
+
+Q21. Scan All TCP Ports
+
+nmap -p- 192.168.80.138
+
+Q22. Scan Top 100 Ports
+
+nmap --top-ports 100 192.168.80.138
+
+Q23. Scan Top 1000 Ports
+
+nmap --top-ports 1000 192.168.80.138
+
+Q24. Identify Filtered Ports
+
+sudo nmap -sS 192.168.80.138
+
+Look for:
+filtered
+
+Q25. Detect HTTP Service Details
+
+nmap -sV -p 80 192.168.80.138
+
+Q26. Detect SSH Version
+
+nmap -sV -p 22 192.168.80.138
+
+Q27. Packet Trace
+
+sudo nmap --packet-trace 192.168.80.138
+
+Q28. HTTP NSE Script
+
+nmap --script http-title 192.168.80.138
+
+OR
+
+nmap --script http-enum 192.168.80.138
+
+Q29. SSL/TLS NSE Script
+
+nmap --script ssl-cert 192.168.80.138
+
+OR
+
+nmap --script ssl-enum-ciphers -p 443 192.168.80.138
+
+Q30. Vulnerability Scan
+
+nmap --script vuln 192.168.80.138
+
+Q31. IPv6 Scan
+
+nmap -6 <IPv6_Address>
+
+Q32. Exclude One Host
+
+nmap 192.168.80.0/24 --exclude 192.168.80.138
+
+Q33. Resume Interrupted Scan
+
+nmap --resume result.gnmap
+
+Q34. Compare TCP and UDP
+
+TCP:
+sudo nmap -sS 192.168.80.138
+
+UDP:
+sudo nmap -sU 192.168.80.138
+
+Q35. Complete Report
+
+sudo nmap -A -O -sV -oA fullreport 192.168.80.138
+
+Useful Commands
+
+Show Help
+nmap --help
+
+Show Version
+nmap --version
+
+Scan Specific Interface
+nmap -e eth0 192.168.80.138
+
+Fast Scan
+nmap -F 192.168.80.138
+
+Timing (Fast)
+nmap -T4 192.168.80.138
+
+Timing (Very Fast)
+nmap -T5 192.168.80.138
+
+Disable DNS Resolution
+nmap -n 192.168.80.138
+
+Show Reason
+nmap --reason 192.168.80.138
+
+List Hosts from File
+nmap -iL hosts.txt
+
+Random Targets
+nmap -iR 5

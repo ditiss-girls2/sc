@@ -1,0 +1,152 @@
+Q1. Start SonarQube.
+
+sudo systemctl start sonarqube
+
+OR
+
+./sonar.sh start
+
+------------------------------------------------
+
+Q2. Check SonarQube status.
+
+sudo systemctl status sonarqube
+
+OR
+
+./sonar.sh status
+
+------------------------------------------------
+
+Q3. Login to SonarQube.
+
+http://localhost:9000
+
+Username: admin
+Password: admin
+
+------------------------------------------------
+
+Q4. Create a new project.
+
+Create Project
+↓
+
+Enter Project Name
+
+↓
+
+Project Key
+
+↓
+
+Generate Token
+
+------------------------------------------------
+
+Q5. Generate Authentication Token.
+
+Administration
+↓
+
+Security
+↓
+
+Users
+↓
+
+Tokens
+
+Generate
+
+------------------------------------------------
+
+Q6. Create sonar-project.properties
+
+sonar.projectKey=myproject
+
+sonar.projectName=MyProject
+
+sonar.sources=.
+
+sonar.host.url=http://localhost:9000
+
+sonar.token=<TOKEN>
+
+------------------------------------------------
+
+Q7. Run SonarScanner.
+
+cd project
+
+sonar-scanner
+
+------------------------------------------------
+
+Q8. View Analysis Report.
+
+Open Dashboard
+
+Check
+
+Bugs
+
+Vulnerabilities
+
+Code Smells
+
+Security Hotspots
+
+Coverage
+
+Duplications
+
+------------------------------------------------
+
+Q9. Re-run analysis after fixing code.
+
+sonar-scanner
+
+------------------------------------------------
+
+Q10. Stop SonarQube.
+
+sudo systemctl stop sonarqube
+
+------------------------------------------------
+
+Q11. Restart SonarQube.
+
+sudo systemctl restart sonarqube
+
+------------------------------------------------
+
+Q12. Verify Port 9000.
+
+ss -tulnp | grep 9000
+
+------------------------------------------------
+
+Q13. Check Scanner Version.
+
+sonar-scanner --version
+
+------------------------------------------------
+
+Q14. Check Java Version.
+
+java -version
+
+------------------------------------------------
+
+Q15. Delete Project.
+
+Administration
+
+↓
+
+Projects
+
+↓
+
+Delete

