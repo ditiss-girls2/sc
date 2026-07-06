@@ -1,3 +1,6 @@
+
+docker run -d --name sonarqube-custom --restart unless-stopped -p 9000:9000 sonarqube:community
+
 Q1. Start SonarQube.
 
 sudo systemctl start sonarqube
